@@ -1,0 +1,134 @@
+# A single node of singly linked list.
+class Node:
+    # Constructor
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+
+# A linked list class with a single head node
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def list_length(self):  # Checking length of the singly linked list
+        current_node = self.head  # Store the data of the head node to a temporary variable
+        length = 0  # Create a variable to keep track of the number of nodes in the linked list by incrementing it
+        while current_node is not None:  # If there's data in the current node during our traversal
+            length += 1  # Then increment the variable length by 1
+            current_node = current_node.next  # Continue traversing
+        return length  # Stop traversing if there's no data in the current node and return the total of length
+
+    def insert_head(self, new_node):  # Inserting from the head node
+        temporary_node = self.head  # Store the data of the head node in a temporary node
+        self.head = new_node  # Make the new node the head node
+        self.head.next = temporary_node  # Make the new node which is now the head node, point to the temporary node
+        del temporary_node  # Then delete the temporary variable
+
+    def insert_at(self, new_node, position):  # Inserting from any given position
+        if self.head is None:
+            print("List empty")
+            return
+        if position >= self.list_length():
+            print("Insert end rather")
+            return
+        if position == 0:
+            print("Insert head rather")
+            return
+        if position < 0:
+            print("Position out of bounds")
+        current_node = self.head
+        current_position = 0  # keeping track of the current position.
+        while True:  # Traversing
+            if current_position == position:
+                previous_node.next = new_node
+                new_node.next = current_node
+                break
+            else:
+                previous_node = current_node  # Storing the data of the previous node
+                current_node = current_node.next
+                current_position += 1
+
+    def insert_end(self, new_node):  # Inserting from the tail of the LinkedList
+        if self.head is None:  # Edge case check
+            self.head = new_node  # Make the new node the head node
+        else:  # If there's already a head node
+            lastNode = self.head  # Then traverse
+            while True:  # Traversing
+                if lastNode.next is None:
+                    break
+                lastNode = lastNode.next
+            lastNode.next = new_node
+
+    def deletion_end(self):
+        if self.head is None:
+            print("List is empty")
+            return
+        if self.list_length() == 1:
+            self.head = None
+            return
+        last_node = self.head
+        while last_node.next is not None:
+            previous_node = last_node
+            last_node = last_node.next
+        previous_node.next = None
+
+    def deletion_at(self, position):
+        if self.head is None:
+            print("List empty")
+            return
+        if position >= self.list_length():
+            print("Delete end rather")
+            return
+        if position == 0:
+            print("Delete head rather")
+            return
+        if position < 0:
+            print("Position out of bounds")
+        current_node = self.head
+        current_position = 0
+        while True:
+            if current_position == position:
+                previous_node.next = current_node.next
+                current_node.next = None
+                break
+            else:
+                previous_node = current_node
+                current_node = current_node.next
+                current_position += 1
+
+    def deletion_head(self):
+        if self.head is None:  # Edge check (If the head node has no data)
+            print("List is empty")  # Then linked list is empty so there's nothing to delete
+            return
+        previous_head = self.head  # But if it does, then store the head node in a temporary variable
+        self.head.next = self.head  # And make the node after the head node, the new head node
+        previous_head.next = None  # Then make the previous head node stored in the temporary variable to point to null
+
+    def printlist(self):
+        if self.head is None:  # Edge case check (If the head node has no data)
+            print("List is empty! ")  # Then the linked list is empty
+            return
+        currentNode = self.head
+        while True:  # Traversing
+            if currentNode is None:  # If the current node has no data,
+                break  # Then stop the traversal
+            else:
+                print(currentNode.data)  # If not, then print the data of the current node
+                currentNode = currentNode.next  # And move on to the next node
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
